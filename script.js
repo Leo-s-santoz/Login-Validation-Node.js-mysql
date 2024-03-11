@@ -5,11 +5,10 @@ let textForm = document.getElementById('textForm');
 let textPassword = document.getElementById('textPassword');
 
 form.addEventListener('submit' , (e) => {
-    if(email.value == '' || password.value == '' ){
-        textForm.textContent = 'Preencha todos os campos!'
-    }else if(validEmail(email.value) === true && validPassword(password.value) === true){
-        console.log(email.value);
-        console.log(password.value);        
+    if(validEmail(email.value) === true && validPassword(password.value) === true){
+        localStorage.setItem('email', email.value);
+        localStorage.setItem('password', password.value);
+        alert('Cadastro realizado com sucesso');
         textForm.textContent = "";
         textPassword.textContent = "";
         textEmail.textContent = "";
