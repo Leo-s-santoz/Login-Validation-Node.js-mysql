@@ -21,7 +21,7 @@ form.addEventListener('submit' , (e) => {
 
 password.addEventListener("keyup", () => {
     if(validPassword (password.value) !== true){
-        textPassword.textContent = "A senha precisa conter pelo menos (1) letra minuscula, (1) letra maiuscula, (1) numero e (1) caracter epecial"
+        textPassword.textContent = "A senha precisa conter pelo menos (1) letra minuscula, (1) letra maiuscula, (1) numero, (1) caracter epecial e 8 digitos"
     }else{
         textPassword.textContent = "";
     }
@@ -41,6 +41,6 @@ function validEmail(email) {
 }
 
 function validPassword(password){
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%#*?&])[A-Za-z0-9@$!%#*?&]{8,}$/;
     return passwordPattern.test(password);
 }

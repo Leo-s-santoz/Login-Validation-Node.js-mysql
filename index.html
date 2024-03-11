@@ -6,17 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-      div {
-        margin: 10px 0;
-      }
-      small {
-        display: block;
-      }
     </style>
   </head>
   <body>
     <form autocomplete="off">
+      <div>
+        <h1 class="cadastro">Cadastre-se</h1>
+      </div>
+
       <div>
         <label for="email">E-mail: </label>
         <input type="text" id="email" placeholder="Digite o seu e-mail" />
@@ -28,10 +25,11 @@
         <input type="password" id="password" placeholder="Digite a sua senha"/>
         <small id="textPassword"></small>
       </div>
-      <button type="submit">Entrar</button>
 
-      <small id="textForm"></small>
-      
+      <div>
+        <button type="submit">Entrar</button>
+        <small id="textForm"></small>
+      </div>
     </form>
     <script src="script.js"></script>
   </body>
