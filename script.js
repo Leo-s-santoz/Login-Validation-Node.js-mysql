@@ -4,10 +4,21 @@ let form = document.querySelector('form');
 let textForm = document.getElementById('textForm');
 let textPassword = document.getElementById('textPassword');
 
+  
+  function sha512(value) {
+    // Gera o hash SHA-512 do valor fornecido usando crypto-js
+    let hash = CryptoJS.SHA512(value).toString(CryptoJS.enc.Hex);
+    
+    // Retorna o hash como uma string
+    return hash;
+  }
+  
 form.addEventListener('submit' , (e) => {
+    console.log('àlek')
     if(validEmail(email.value) === true && validPassword(password.value) === true){
         localStorage.setItem('email', email.value);
-        localStorage.setItem('password', password.value);
+        let hashedpassword =  sha512(password.value)
+        localStorage.setItem('password', hashedpassword);
         alert('Cadastro realizado com sucesso');
         textForm.textContent = "";
         textPassword.textContent = "";
