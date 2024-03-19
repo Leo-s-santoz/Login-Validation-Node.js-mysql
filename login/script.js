@@ -1,18 +1,25 @@
+function sha512(value) {
+  let hash = CryptoJS.SHA512(value).toString(CryptoJS.enc.Hex);
+  return hash;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('form').addEventListener('submit', (e) => {
+    const formulario = document.querySelector('.form')
+    formulario.addEventListener('submit', (e) => {
       let email = document.getElementById('email').value;
       let password = document.getElementById('password').value;
   
       let storedEmail = localStorage.getItem('email');
       let storedPassword = localStorage.getItem('password');
-  
-      if (email === storedEmail && password === storedPassword) {
+      
+      let hashedpassword = sha512(password);
+      console.log(hashedpassword)
+      console.log(storedPassword)
+      if ((email === storedEmail) === true && (hashedpassword === storedPassword) === true){
         alert('Login bem-sucedido!');
-        document.getElementById('textForm').textContent = '';
       } else {
-        document.getElementById('textForm').textContent = 'Credenciais inválidas. Tente novamente.';
+        alert("Credenciais inválidas. Tente novamente.");
         e.preventDefault();
-        }
+      }
     });
-  });
-  
+});
