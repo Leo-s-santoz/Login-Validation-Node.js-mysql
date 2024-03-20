@@ -38,5 +38,6 @@ form.addEventListener('submit', (e) => {
   .catch(error => {
     console.error('Erro ao fazer login:', error);
     alert("Ocorreu um erro ao tentar fazer login.");
+
   });
 });
