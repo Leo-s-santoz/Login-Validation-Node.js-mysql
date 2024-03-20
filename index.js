@@ -1,16 +1,18 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser")
-const Post = require('./modules/Post')
+const Cad = require('./modules/Cad')
 
 //bodyParser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //rotas
 app.use(express.static("./"));
+
+//rota de cadastro
 app.post('/add', function(req, res){
-    Post.create({
+    Cad.create({
         nome: req.body.name,
         email: req.body.email,
         password: req.body.password
@@ -21,6 +23,31 @@ app.post('/add', function(req, res){
     })
 })
 
+//rota de login
+app.post('/login', async (req, res) => {
+    try {
+      // Buscar o usuário pelo email fornecido
+      const cadastro = await Cad.findOne({ where: { email: req.body.email } });
+    console.log("cadastro", cadastro)
+      if (cadastro) {
+        // Comparar a senha fornecida com a senha armazenada no banco de dados
+        if (cadastro.password == req.body.password) {
+          // Senha válida, login bem-sucedido
+          console.log("comp", cadastro.password == req.body.password)
+          res.status(200).send("Login bem-sucedido!")
+        } else {
+          // Senha inválida
+          const error = new Error("Senha invalida")
+          res.status(401).json({error: error.message});
+        }
+      } else {
+        return res.status(404).send("Usuário não encontrado");
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      return res.status(500).send("Erro interno do servidor");
+    }
+  });
 
 
 //definida a porta do localhost

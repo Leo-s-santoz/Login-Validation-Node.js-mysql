@@ -1,6 +1,6 @@
 const db = require('../db')
 
-const Post = db.sequelize.define('usuarios',{
+const Cad = db.sequelize.define('usuarios',{
     nome: {
         type: db.Sequelize.STRING(50)
     },
@@ -13,4 +13,4 @@ const Post = db.sequelize.define('usuarios',{
 })
 
 //Post.sync({force: true})
-module.exports = Post
+module.exports = Cad

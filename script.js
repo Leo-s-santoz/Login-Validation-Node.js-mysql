@@ -35,9 +35,7 @@ form.addEventListener('submit', (e) => {
       body: JSON.stringify(formData)
     })
     .then(response => response.text())
-    .then(data => {
-      console.log(data); // Exibe a resposta do servidor no console
-    }).catch(error => {
+    .catch(error => {
       console.error('Erro ao enviar dados para o servidor:', error);
     });
   } else {
@@ -86,7 +84,7 @@ function validEmail(email) {
 
 // Função para validar a senha
 function validPassword(password) {
-  const passwordPattern = /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%#*?&])[A-Za-z0-9@$!%#*?&]{8,}$/;
+  const passwordPattern = /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[A-Za-z0-9]{5,}$/;
   return passwordPattern.test(password);
 }
 

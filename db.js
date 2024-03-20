@@ -11,7 +11,7 @@ sequelize.authenticate().then(function(){
 }).catch(function(erro){
     console.log("Falha ao conectar: "+erro)
 });
-
+//exportação do módulo posts para que possa ser usado em outras páginas js
 module.exports = {
     Sequelize: Sequelize,
     sequelize: sequelize

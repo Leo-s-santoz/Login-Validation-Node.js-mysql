@@ -1,25 +1,42 @@
+let form = document.querySelector('form');
+
 function sha512(value) {
   let hash = CryptoJS.SHA512(value).toString(CryptoJS.enc.Hex);
   return hash;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const formulario = document.querySelector('.form')
-    formulario.addEventListener('submit', (e) => {
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value;
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); // Impedir o envio do formulário diretamente pelo navegador
+
+  // Capturar os valores de email e senha no momento em que o formulário é submetido
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
   
-      let storedEmail = localStorage.getItem('email');
-      let storedPassword = localStorage.getItem('password');
-      
-      let hashedpassword = sha512(password);
-      console.log(hashedpassword)
-      console.log(storedPassword)
-      if ((email === storedEmail) === true && (hashedpassword === storedPassword) === true){
-        alert('Login bem-sucedido!');
-      } else {
-        alert("Credenciais inválidas. Tente novamente.");
-        e.preventDefault();
-      }
-    });
+  const hashedPassword = sha512(password);
+  const formData = {
+    email: email,
+    password: hashedPassword
+  };
+
+  // Enviar os dados do formulário para o servidor
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if(!response.ok){
+      throw new Error
+    } return response
+  })// Converter a resposta em JSON
+  .then(data => {
+      alert('Login bem-sucedido!');
+    
+  })
+  .catch(error => {
+    console.error('Erro ao fazer login:', error);
+    alert("Ocorreu um erro ao tentar fazer login.");
+  });
 });
