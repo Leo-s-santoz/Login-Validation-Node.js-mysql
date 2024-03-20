@@ -1,27 +1,43 @@
+let form = document.querySelector('form');
+
 function sha512(value) {
-  // Gera o hash SHA-512 do valor fornecido usando crypto-js
   let hash = CryptoJS.SHA512(value).toString(CryptoJS.enc.Hex);
-  
-  // Retorna o hash como uma string
   return hash;
 }
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('form').addEventListener('submit', (e) => {
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value;
-      let hashedpassword =  sha512(password.value)
-      localStorage.setItem('password', hashedpassword);
-      let storedEmail = localStorage.getItem('email');
-      let storedPassword = localStorage.getItem('password');
-      
-      if (email === storedEmail && hashedpassword === storedPassword) {
-        alert('Login bem-sucedido!');
-        document.getElementById('textForm').textContent = '';
-      } else {
-        document.getElementById('textForm').textContent = 'Credenciais inválidas. Tente novamente.';
-        e.preventDefault();
-        alert ('Lo')
-        }
-    });
-  });
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); // Impedir o envio do formulário diretamente pelo navegador
+
+  // Capturar os valores de email e senha no momento em que o formulário é submetido
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
   
+  const hashedPassword = sha512(password);
+  const formData = {
+    email: email,
+    password: hashedPassword
+  };
+
+  // Enviar os dados do formulário para o servidor
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if(!response.ok){
+      throw new Error
+    } return response
+  })// Converter a resposta em JSON
+  .then(data => {
+      alert('Login bem-sucedido!');
+    
+  })
+  .catch(error => {
+    console.error('Erro ao fazer login:', error);
+    alert("Ocorreu um erro ao tentar fazer login.");
+
+  });
+});

@@ -15,11 +15,13 @@ form {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 300px;
+  margin-top: 20px; /* Adicionado um espaço extra acima do formulário */
 }
 
-h1 {
+.cadastro { /* Atualizado para usar a classe .cadastro */
   text-align: center;
   color: #333;
+  margin-bottom: 20px; /* Adicionado um espaço extra abaixo do título */
 }
 
 label {
@@ -29,7 +31,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: calc(100% - 20px); /* Alterado para lidar com a largura do padding */
   padding: 8px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -45,6 +47,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  margin-top: 10px; /* Adicionado um espaço extra acima do botão */
 }
 
 button:hover {

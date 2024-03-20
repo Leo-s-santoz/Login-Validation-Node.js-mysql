@@ -16,12 +16,12 @@ body {
   }
   
   form {
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-width: 400px;
-    width: 100%;
+    width: 300px;
+    margin-top: 20px;
   }
   
   div {
@@ -39,9 +39,9 @@ body {
   }
   
   input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 8px;
-    margin-top: 4px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
