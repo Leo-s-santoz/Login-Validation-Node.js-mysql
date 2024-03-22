@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser")
 const Cad = require('./modules/Cad')
-
+const genetateRandomSalt = require('./modules/generateRandomSalt')
 //bodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 app.use(express.static("./"));
 
 //rota de cadastro
+let salt = ''
 app.post('/add', function(req, res){
     Cad.create({
-        nome: req.body.name,
+        name: req.body.name,
         email: req.body.email,
-        password: req.body.password
-    }).then(function(){
-        res.send("Post criado com sucesso")
+        salt: salt = genetateRandomSalt(),
+        password: salt + req.body.password
     }).catch(function(erro){
         res.send("Houve um erro: "+erro)
     })
