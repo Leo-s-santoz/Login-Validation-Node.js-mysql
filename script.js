@@ -38,6 +38,7 @@ form.addEventListener('submit', (e) => {
     .catch(error => {
       console.error('Erro ao enviar dados para o servidor:', error);
     });
+    alert("Cadastro Realizado com sucesso!")
   } else {
     console.log("Requisição não atendida");
   }
@@ -47,7 +48,7 @@ form.addEventListener('submit', (e) => {
 password.addEventListener("keyup", () => {
   if (validPassword(password.value) !== true) {
     // Se a senha não for válida, exibe uma mensagem de erro
-    textPassword.textContent = "A senha precisa conter pelo menos (1) letra minúscula, (1) letra maiúscula, (1) número, (1) caracter especial e ter no mínimo 8 caracteres";
+    textPassword.textContent = "A senha precisa conter pelo menos (1) letra minúscula, (1) letra maiúscula, (1) número, e ter no mínimo 5 caracteres";
   } else {
     // Se a senha for válida, limpa a mensagem de erro
     textPassword.textContent = "";
@@ -84,6 +85,9 @@ function validEmail(email) {
 
 // Função para validar a senha
 function validPassword(password) {
+  //padrão de senhas fraco
+  //const passwordPattern = /^(?=.*[0-9])[0-9]{5,}$/;
+  //padrão de senhas forte
   const passwordPattern = /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[A-Za-z0-9]{5,}$/;
   return passwordPattern.test(password);
 }

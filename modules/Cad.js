@@ -12,5 +12,5 @@ const Cad = db.sequelize.define('usuarios',{
     }
 })
 
-//Post.sync({force: true})
+//Cad.sync({force: true})
 module.exports = Cad

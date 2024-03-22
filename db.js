@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 //conexão com o banco
-const sequelize = new Sequelize("Cadastros", "root", "asQW12!@", {
+const sequelize = new Sequelize("cadastros_fracos", "root", "asQW12!@", {
     host: "localhost",
     dialect: "mysql"
 });
